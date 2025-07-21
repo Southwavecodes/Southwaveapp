@@ -9,7 +9,11 @@ class SpotifyAPI {
 
   private async getAccessToken(): Promise<string> {
     if (this.accessToken && Date.now() < this.tokenExpiry) {
-      return this.accessToken
+      if (!this.accessToken) {
+  throw new Error('Access token is null')
+}
+return this.accessToken
+
     }
 
     const clientId = process.env.SPOTIFY_CLIENT_ID
